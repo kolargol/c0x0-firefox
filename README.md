@@ -1,0 +1,2 @@
+# c0x0-firefox
+c0x0.com Firefox Add-on
