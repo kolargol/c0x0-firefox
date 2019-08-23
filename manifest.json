@@ -1,0 +1,35 @@
+{
+
+  "manifest_version": 2,
+  "name": "coxo.io",
+  "version": "1.0",
+
+  "description": "c0x0.com Firefox extension",
+  "homepage_url": "https://c0x0.com",
+
+  "permissions": [
+    "tabs",
+    "storage"
+  ],
+
+  "icons": {
+    "48": "icons/coxo-48.png"
+  },
+
+  "options_ui": {
+    "page": "options.html"
+  },
+
+  "browser_action": {
+    "default_icon": "icons/coxo-48.png",
+    "default_title": "c0x0.com",
+    "default_popup": "popup/main.html"
+  },
+
+  "applications": {
+    "gecko": {
+      "id": "admin@coxo.io"
+    }
+  }
+
+}
