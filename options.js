@@ -8,7 +8,7 @@ async function checkJWT(e) {
   });
   let statusmsg = await response.statusText;
   if (statusmsg == "OK") {
-    document.getElementById("status").innerHTML = "Access Token is Correct.<br>Settings Saved";
+    document.getElementById("status").innerHTML = "<span class=\"text-success\">Access Token is Correct</span><br><strong>Settings Saved</strong>";
     saveOptions();
   } else {
     document.getElementById("status").innerHTML = "Invalid Access Token!";

@@ -4,19 +4,27 @@
   <head>
     <title>c0x0.com Add-On Settings</title>
     <meta charset="utf-8">
+    <link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css">
   </head>
 
   <body>
-  <h4>c0x0.com browser extension require special access token to function properly.</h4>
+  <div id="container">
+  <h5 class="mt-3">c0x0.com browser extension require Access Token to function properly.</h5>
   <p>To obtain <strong>Access Token</strong>, please register at <a href="https://web.c0x0.com/register/">web.c0x0.com/register/</a></p>
     <form>
-        <label>Insert Access Token: <input style="width: 60%" type="text" id="jwt" ></label>
-        <button class="browser-style" type="submit">Save</button>
+        <div class="input-group mb-3">
+          <input class="form-control text-center" type="text" placeholder="Access Token" id="jwt" >
+          <div class="input-group-append">
+            <button class="btn btn-primary" type="submit">Save</button>
+          </div>
+        </div>
     </form>
-  <p align="center" id="status" style="font-weight: bold;"></p>
-  <p>
-  <strong>Warning: </strong><em>Do not share your Access Token. It provides special programic access to your account!</em>
-  </p>
-    <script src="options.js"></script>
+  <div class="text-center" id="status">
+  </div>
+  <div class="mt-3">
+    <strong>Warning: </strong><em>Do not share your Access Token. It provides programic access to your account!</em>
+  </div>
+  <script src="options.js"></script>
+  </div>
   </body>
 </html>
