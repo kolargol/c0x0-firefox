@@ -75,14 +75,15 @@ async function createAlias(domainScope, aliasName) {
     aliasName = "Unnamed";
     console.log("User did not provided description for new alias");
   }
-  document.getElementById("maincontent").innerHTML = "<h5>New Alias Have Been Created</h5>";
+  document.getElementById("maincontent").innerHTML = "<h5 class=\"text-success\">New Alias Have Been Created</h5>";
 
   /* Copy Input */
   var parentElement = document.getElementById('maincontent');
   var childElementBody = document.createElement('div');
-  childElementBody.innerHTML = "<strong>" + aliasName + "</strong><br>" +
+  childElementBody.setAttribute('class', 'card bg-light mt-3');
+  childElementBody.innerHTML = "<div class=\"card-body p-2 m-1\"><strong>" + aliasName + "</strong><br>" +
     "<div class=\"input-group\"><input id=\"btnclick\" type=\"text\" class=\"form-control bg-light text-center text-monospace\" readonly value=\"" + newalias.result +"\">" +
-    "<div class=\"input-group-append\"><button class=\"btn btn-primary\" type=\"button\" data-clipboard-target=\"#btnclick\">Copy</button></div></div>";
+    "<div class=\"input-group-append\"><button class=\"btn btn-primary\" type=\"button\" data-clipboard-target=\"#btnclick\">Copy</button></div></div></div>";
   parentElement.appendChild(childElementBody);
 
   /* Clipboard copy code */
