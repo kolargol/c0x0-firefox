@@ -1,8 +1,6 @@
 /* Parse active tab URL and return domain name */
 function url_to_domain(tabUrl) {
-  var a = document.createElement('a');
-      a.href = tabUrl;
-  return a.hostname;
+  return new URL(tabUrl).hostname
 }
 
 /* Get active tab */
