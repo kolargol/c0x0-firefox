@@ -1,10 +1,10 @@
 {
 
   "manifest_version": 2,
-  "name": "coxo.io",
+  "name": "c0x0.com browser extension",
   "version": "1.0",
 
-  "description": "c0x0.com Firefox extension",
+  "description": "c0x0.com best friend in protecting your e-mail privacy",
   "homepage_url": "https://c0x0.com",
 
   "permissions": [
@@ -28,7 +28,7 @@
 
   "applications": {
     "gecko": {
-      "id": "admin@coxo.io"
+      "id": "support@c0x0.com"
     }
   }
 

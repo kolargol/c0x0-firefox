@@ -1,6 +1,6 @@
 async function checkJWT(e) {
   e.preventDefault();
-  let response = await fetch('https://api.c0x0.com/hc', {
+  let response = await fetch('https://api.c0x0.com/xpi/hc', {
     method: "GET",
     headers: {
       Authorization: "Bearer " + document.querySelector("#jwt").value

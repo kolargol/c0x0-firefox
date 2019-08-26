@@ -54,7 +54,7 @@ async function createAlias(domainScope, aliasName) {
   }
 
   /* Create alias API call */
-  let response = await fetch('https://api.c0x0.com/v1/create-alias-xpi/' + domainScope + aliasEncoded, {
+  let response = await fetch('https://api.c0x0.com/xpi/create-alias-xpi/' + domainScope + aliasEncoded, {
     method: "POST",
     headers: {
       Authorization: "Bearer " + jwtoken.jwt
@@ -169,7 +169,7 @@ async function listAliasesScope(scope) {
   let jwtoken = await browser.storage.sync.get("jwt");
 
   /* List all aliases bound to that domain */
-  let response = await fetch('https://api.c0x0.com/v1/list-aliases/' + scope, {
+  let response = await fetch('https://api.c0x0.com/xpi/list-aliases/' + scope, {
     method: "GET",
     headers: {
       Authorization: "Bearer " + jwtoken.jwt
@@ -234,7 +234,7 @@ async function here() {
   let jwtoken = await browser.storage.sync.get("jwt");
 
   /* Check if API works and JWT token is correct */
-  let response = await fetch('https://api.c0x0.com/hc', {
+  let response = await fetch('https://api.c0x0.com/xpi/hc', {
     method: "GET",
     headers: {
       Authorization: "Bearer " + jwtoken.jwt
