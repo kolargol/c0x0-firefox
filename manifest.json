@@ -14,7 +14,8 @@
   ],
 
   "icons": {
-    "48": "icons/coxo-48.png"
+    "48": "icons/coxo-48-color.png",
+    "96": "icons/coxo-96-color.png"
   },
 
   "options_ui": {
