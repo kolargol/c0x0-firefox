@@ -272,5 +272,23 @@ async function here() {
   }
 }
 
-/* Init */
-here();
+/* Check if Access Token is set */
+async function preFlightCheck(){
+  let jwtoken = await browser.storage.sync.get("jwt");
+  if (!jwtoken.jwt) {
+      console.log("User did not configured Access Token");
+    /* Welcome new user */
+    document.getElementById("maincontent").innerHTML = "<h5>Thank You!</h5>" +
+    "<small>Looks like you just installed <a href=\"https://c0x0.com\">c0x0.com</a> browser extension!<br>To configure extension you need to have active c0x0.com account.</strong></small>" +
+    "<br><br><button id=\"createaccount\" class=\"btn btn-primary\">Create Account</button> or <button id=\"optionsbutton\" class=\"btn btn-primary\">Go To Settings</button>";
+    let a = document.getElementById("optionsbutton");
+    a.onclick = function() { openSettings(); };
+    let b = document.getElementById("createaccount");
+    b.onclick = function () { window.open("https://web.c0x0.com/register/"); };
+    } else {
+      here();
+  }
+}
+
+/* Init here */
+preFlightCheck();
