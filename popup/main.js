@@ -64,7 +64,7 @@ async function createAlias(domainScope, aliasName) {
   /* If response fails, notify user */
   if (response.status != "200") {
     let st = await response.text();
-    document.getElementById("warningmsg").innerHTML = "<br><strong>Error: </strong>" + st;
+    document.getElementById("warningmsg").textContent = "Error: " + st;
   }
 
   let newalias = await response.json();
@@ -138,7 +138,7 @@ async function createForm(){
 
   /* Error placeholder */
   var errplace = document.createElement('div');
-  errplace.setAttribute('class','text-danger');
+  errplace.setAttribute('class','text-danger mt-3');
   errplace.setAttribute('id', 'warningmsg');
   parentElement.appendChild(errplace);
 }
