@@ -14,6 +14,17 @@ function Base64EncodeUrl(str){
     return str.replace(/\+/g, '-').replace(/\//g, '_').replace(/\=+$/, '');
 }
 
+function safeEscape(str){
+  if (str == null)
+    return "";
+  return str.toString().
+    replace(/&/g,"&amp;").
+    replace(/</g,"&lt;").
+    replace(/>/g,"&gt;").
+    replace(/\'/g,"&apos;").
+    replace(/\"/g,"&quot;");
+}
+
 /* Handle Fatal Errors */
 function FatalError() {
   Error.apply(this, arguments);
@@ -79,8 +90,8 @@ async function createAlias(domainScope, aliasName) {
   var parentElement = document.getElementById('maincontent');
   var childElementBody = document.createElement('div');
   childElementBody.setAttribute('class', 'card bg-light mt-3');
-  childElementBody.innerHTML = "<div class=\"card-body p-2 m-1\"><strong>" + aliasName + "</strong><br>" +
-    "<div class=\"input-group\"><input id=\"btnclick\" type=\"text\" class=\"form-control bg-light text-center text-monospace\" readonly value=\"" + newalias.result +"\">" +
+  childElementBody.innerHTML = "<div class=\"card-body p-2 m-1\"><strong>" + safeEscape(aliasName) + "</strong><br>" +
+    "<div class=\"input-group\"><input id=\"btnclick\" type=\"text\" class=\"form-control bg-light text-center text-monospace\" readonly value=\"" + safeEscape(newalias.result) +"\">" +
     "<div class=\"input-group-append\"><button class=\"btn btn-primary\" type=\"button\" data-clipboard-target=\"#btnclick\">Copy</button></div></div></div>";
   parentElement.appendChild(childElementBody);
 
@@ -104,7 +115,7 @@ async function createForm(){
 
   /* Clear previous content */
   document.getElementById("maincontent").innerHTML = "<h5>Create New Alias</h5><small>You are creating new alias." +
-    "This alias will be associated with <strong>" + scopedomain + "</strong> domain. " +
+    "This alias will be associated with <strong>" + safeEscape(scopedomain) + "</strong> domain. " +
     "You can edit alias properties anytime at <a href=\"https://web.c0x0.com/shield/\">web.c0x0.com/shield/</a> website.</small>";
 
   /* Prepare form */
@@ -179,7 +190,7 @@ async function listAliasesScope(scope) {
   /* Catch error response from server */
   if (response.status != "200") {
     let st = await response.text();
-    document.getElementById("maincontent").innerHTML = "<strong class=\"text-danger\">Error: </strong>" + st +
+    document.getElementById("maincontent").innerHTML = "<strong class=\"text-danger\">Error: </strong>" + safeEscape(st) +
     "<br><small>Please check if you have enabled <strong>API Access</strong> in <a href=\"https://web.c0x0.com/shield/profile.php#profile\">web.c0x0.com</a> account settings.";
   }
 
@@ -203,9 +214,9 @@ async function listAliasesScope(scope) {
     /* Card Body */
     var childElementBody = document.createElement('div');
     childElementBody.setAttribute('class', 'card-body p-1');
-    childElementBody.innerHTML = "<strong>" + alias.tag + "</strong><br>" +
-      "<div class=\"input-group\"><input id=\"btn" + alias.alias_id + "\"type=\"text\" class=\"form-control bg-light text-center text-monospace\" readonly value=\"" + alias.alias +"\">" +
-      "<div class=\"input-group-append\"><button class=\"btn btn-primary\" type=\"button\" data-clipboard-target=\"#btn" + alias.alias_id + "\">Copy</button></div></div>";
+    childElementBody.innerHTML = "<strong>" + safeEscape(alias.tag) + "</strong><br>" +
+      "<div class=\"input-group\"><input id=\"btn" + safeEscape(alias.alias_id) + "\"type=\"text\" class=\"form-control bg-light text-center text-monospace\" readonly value=\"" + safeEscape(alias.alias) +"\">" +
+      "<div class=\"input-group-append\"><button class=\"btn btn-primary\" type=\"button\" data-clipboard-target=\"#btn" + safeEscape(alias.alias_id) + "\">Copy</button></div></div>";
     childElement.appendChild(childElementBody);
   }
 
@@ -252,7 +263,7 @@ async function here() {
     /* Get current domain in active tab */
     let tabs = await browser.tabs.query({currentWindow: true, active: true});
     var scopedomain = logTabs(tabs);
-    document.getElementById("scopedomain").innerHTML = scopedomain;
+    document.getElementById("scopedomain").innerHTML = safeEscape(scopedomain);
 
     /* We are now ready to list aliases for given scope */
     listAliasesScope(scopedomain);
