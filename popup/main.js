@@ -211,42 +211,40 @@ async function listAliasesScope(scope) {
   if (aliases.result == "empty") {
       console.log("User do not have any aliases bound to that scope. Let him issue one...");
       noAliasesDialog();
-  }
+    } else {
+      /* Print all aliases we found */
+      var parentElement = document.getElementById('maincontent');
+      for (let alias of aliases) {
+        /* Create Card */
+        /* Card */
+        var childElement = document.createElement('div');
+        childElement.setAttribute('class', 'card bg-light p-1 mb-4 mt-2');
+        parentElement.appendChild(childElement);
 
-  /* Print all aliases we found */
-  var parentElement = document.getElementById('maincontent');
-  for (let alias of aliases) {
-    /* Create Card */
-    /* Card */
-    var childElement = document.createElement('div');
-    childElement.setAttribute('class', 'card bg-light p-1 mb-4 mt-2');
-    parentElement.appendChild(childElement);
+        /* Card Body */
+        var childElementBody = document.createElement('div');
+        childElementBody.setAttribute('class', 'card-body p-1');
+        childElementBody.innerHTML = "<strong>" + safeEscape(alias.tag) + "</strong><br>" +
+          "<div class=\"input-group\"><input id=\"btn" + safeEscape(alias.alias_id) + "\"type=\"text\" class=\"form-control bg-light text-center text-monospace\" readonly value=\"" + safeEscape(alias.alias) +"\">" +
+          "<div class=\"input-group-append\"><button class=\"btn btn-primary\" type=\"button\" data-clipboard-target=\"#btn" + safeEscape(alias.alias_id) + "\">Copy</button></div></div>";
+        childElement.appendChild(childElementBody);
+      }
 
-    /* Card Body */
-    var childElementBody = document.createElement('div');
-    childElementBody.setAttribute('class', 'card-body p-1');
-    childElementBody.innerHTML = "<strong>" + safeEscape(alias.tag) + "</strong><br>" +
-      "<div class=\"input-group\"><input id=\"btn" + safeEscape(alias.alias_id) + "\"type=\"text\" class=\"form-control bg-light text-center text-monospace\" readonly value=\"" + safeEscape(alias.alias) +"\">" +
-      "<div class=\"input-group-append\"><button class=\"btn btn-primary\" type=\"button\" data-clipboard-target=\"#btn" + safeEscape(alias.alias_id) + "\">Copy</button></div></div>";
-    childElement.appendChild(childElementBody);
-  }
+      /* Clipboard copy code */
+      var clipboard = new ClipboardJS('.btn');
+      clipboard.on('success', function(e) {
+          console.log(e);
+      });
+      clipboard.on('error', function(e) {
+          console.log(e);
+      });
 
-  /* Clipboard copy code */
-  var clipboard = new ClipboardJS('.btn');
-  clipboard.on('success', function(e) {
-      console.log(e);
-  });
-  clipboard.on('error', function(e) {
-      console.log(e);
-  });
-
-  var addAnotherOne = document.createElement('button');
-  addAnotherOne.setAttribute('class','btn btn-success');
-  addAnotherOne.textContent = "Create Another One?";
-  addAnotherOne.onclick = function() { createForm(); };
-  parentElement.appendChild(addAnotherOne);
-
-  console.log(aliases);
+      var addAnotherOne = document.createElement('button');
+      addAnotherOne.setAttribute('class','btn btn-success');
+      addAnotherOne.textContent = "Create Another One?";
+      addAnotherOne.onclick = function() { createForm(); };
+      parentElement.appendChild(addAnotherOne);
+   }
 }
 
 
