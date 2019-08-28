@@ -10,10 +10,21 @@ function logTabs(tabs) {
   }
 }
 
+/* We need to sent Base64URL string to backend API */
 function Base64EncodeUrl(str){
-    return str.replace(/\+/g, '-').replace(/\//g, '_').replace(/\=+$/, '');
+  return str.replace(/\+/g, '-').replace(/\//g, '_').replace(/\=+$/, '');
 }
 
+/* Create unicode compilant base64 */
+function b64EncodeUnicode(str) {
+  return Base64EncodeUrl(btoa(encodeURIComponent(str).replace(/%([0-9A-F]{2})/g,
+    function toSolidBytes(match, p1) {
+      return Base64EncodeUrl(String.fromCharCode('0x' + p1));
+    }
+  )));
+}
+
+/* Escape strings so it is safe to display them */
 function safeEscape(str){
   if (str == null)
     return "";
@@ -60,7 +71,7 @@ async function createAlias(domainScope, aliasName) {
   /* If aliasName is not empty, construct proper URL */
   let aliasEncoded = "";
   if (aliasName) {
-    aliasEncoded = Base64EncodeUrl(btoa(aliasName));
+    aliasEncoded = b64EncodeUnicode(aliasName);
     aliasEncoded = "/" + aliasEncoded;
   }
 
