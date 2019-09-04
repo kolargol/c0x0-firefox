@@ -278,7 +278,7 @@ async function here() {
     /* Get current domain in active tab */
     let tabs = await browser.tabs.query({currentWindow: true, active: true});
     var scopedomain = logTabs(tabs);
-    document.getElementById("scopedomain").innerHTML = safeEscape(scopedomain);
+    document.getElementById("scopedomain").textContent = safeEscape(scopedomain);
 
     /* We are now ready to list aliases for given scope */
     listAliasesScope(scopedomain);
