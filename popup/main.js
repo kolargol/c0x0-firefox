@@ -278,10 +278,15 @@ async function here() {
     /* Get current domain in active tab */
     let tabs = await browser.tabs.query({currentWindow: true, active: true});
     var scopedomain = logTabs(tabs);
-    document.getElementById("scopedomain").textContent = safeEscape(scopedomain);
+    if (scopedomain) {
+        document.getElementById("scopedomain").textContent = safeEscape(scopedomain);
 
-    /* We are now ready to list aliases for given scope */
-    listAliasesScope(scopedomain);
+        /* We are now ready to list aliases for given scope */
+        listAliasesScope(scopedomain);
+      } else {
+        /* If extension is used on blank page, display proper message */
+        document.getElementById("scopedomain").textContent = "Use this extension on tab where website content is loaded";
+    }
 
   } else {
     /* Draw Status Line */
