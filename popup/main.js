@@ -187,6 +187,14 @@ function noAliasesDialog(){
 async function listAliasesScope(scope) {
   console.log("Checking if aliases are present for " + scope + " domain");
 
+  /* Prepare placeholder */
+  var loader = document.getElementById('maincontent');
+  var childLoader = document.createElement('div');
+  childLoader.setAttribute('class', 'p-5 text-danger text-monospace');
+  childLoader.setAttribute('style', 'min-height: 150px;vertical-align: middle;');
+  childLoader.textContent = "Loading data...";
+  loader.appendChild(childLoader);
+
   /* Get token from storage */
   let jwtoken = await browser.storage.sync.get("jwt");
 
@@ -206,6 +214,9 @@ async function listAliasesScope(scope) {
   }
 
   let aliases = await response.json();
+
+  /* Destroy loader */
+  loader.removeChild(childLoader);
 
   /* If result is empty, display create alias dialog */
   if (aliases.result == "empty") {
